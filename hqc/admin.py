@@ -18,7 +18,7 @@ class List(MethodView):
 
 
 class Detail(MethodView):
-    docorators = [require_auth]
+    decorators = [require_auth]
     reply_form = model_form(Reply, exclude=['created_at'])
 
     def get_context(self, msg_id):
@@ -50,5 +50,26 @@ class Detail(MethodView):
         return render_template('admin/detail.djhtml', **context)
 
 
+class MsgOperate(MethodView):
+    decorators = [require_auth]
+
+    def post(self):
+        msg_id = int(request.form.get('msg_id'))
+        comm = str(request.form.get('comm'))
+        #print(msg_id)
+        edit_msg = Message.objects.get_or_404(msg_id=msg_id)
+        if comm == 'del':
+            edit_msg.delete()
+        elif comm == 'show':
+            if edit_msg.is_show:
+                edit_msg.is_show = False
+            else:
+                edit_msg.is_show = True
+            edit_msg.save()
+
+        return "sccuess"
+
+
 admin.add_url_rule('/admin/', view_func=List.as_view('list'))
 admin.add_url_rule('/admin/<msg_id>/', view_func=Detail.as_view('detail'))
+admin.add_url_rule('/admin/comm/',view_func=MsgOperate.as_view('command'))

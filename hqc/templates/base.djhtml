@@ -5,6 +5,7 @@
         <title>hqc message board</title>
         <link href="//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <style>.content {padding-top: 100px;}</style>
+        <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
     </head>
     {% block topbar %}
         <nav class="navbar navbar-inverse navbar-fixed-top">

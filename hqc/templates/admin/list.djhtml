@@ -1,6 +1,23 @@
 {% extends "admin/base.djhtml" %}
 
 {% block content %}
+    <script type="text/javascript">
+     function ajax(msg_id, comm){
+         //alert(msg_id + comm);
+          $.post("{{ url_for('admin.command') }}",
+            {
+            msg_id: msg_id,
+            comm: comm,
+            },
+            function(data,status){
+                alert("Data: " + data + "\nStatus: " + status);
+                location.reload();
+            });
+     }
+    </script>
+    <button>POST text</button>
+
+
     <table class="table table-bordered table-striped">
         <thead>
             <th>Title</th>
@@ -10,9 +27,18 @@
         <tbody>
             {% for msg in msgs %}
                 <tr>
-                    <th><a href="{{ url_for('admin.detail', msg_id=msg.msg_id)}}">{{ msg.title}}</a></th>
+                    <th>
+                        <p>msg id:{{ msg.msg_id}}</p>
+                        <a href="{{ url_for('admin.detail', msg_id=msg.msg_id)}}">{{ msg.title}}</a>
+                    </th>
                     <td>{{ msg.created_at.strftime('%Y-%m-%d') }}</td>
-                    <td><a href="{{ url_for('admin.detail', msg_id=msg.msg_id)}}" class="btn btn-primary">Edit</a></td>
+                    <td><a href="{{ url_for('admin.detail', msg_id=msg.msg_id)}}" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-info" onclick="ajax({{msg.msg_id}}, 'show')">
+                            {% if msg.is_show %}dis_show{% else %}show{% endif %}
+                        </button>
+                        <button class="btn btn-danger" onclick="ajax({{msg.msg_id}}, 'del')">delete</button>
+                        <h2> is_show:{{ msg.is_show}}</h2>
+                    </td>
 
                 </tr>
             {% endfor %}
