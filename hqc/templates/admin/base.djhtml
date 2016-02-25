@@ -1,0 +1,22 @@
+{% extends "base.djhtml" %}
+
+{% block topbar %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <h2>
+                    <a href="{{ url_for('admin.list') }}" class="brand">Hqc Admin</a>
+                    <small>power by mongodb , mongoengine, flask</small>
+                </h2>
+            </div>
+            <div class="navbar-collapse">
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block js_footer %}
+    <hr>
+    <h2>Footer</h2>
+    <hr>
+{% endblock %}

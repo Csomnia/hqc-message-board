@@ -1,0 +1,24 @@
+{% import "_forms.djhtml" as forms %}
+{% extends "base.djhtml" %}
+
+{% block content %}
+    <h2>add a message</h2>
+    <form action="." method="post">
+        {{ forms.render(form) }}
+        <div class="actions">
+            <input type="submit" class="btn btn-primary" value="sub_msg">
+        </div>
+    </form>
+    <hr>
+    {% for msg in msgs %}
+        <h2><a href="{{ url_for('messages.detail', msg_id=msg.msg_id) }}">{{ msg.title }}</a></h2>
+        <p>{{ msg.body | truncate(100) }}</p>
+        <p>
+            {{ msg.created_at.strftime('%H:%M %Y-%m-%d')}}|
+            {% with total=msg.replies|length %}
+                <h2> replies length is:{{ total }}</h2>
+
+            {% endwith %}
+        </p>
+    {% endfor %}
+{% endblock%}

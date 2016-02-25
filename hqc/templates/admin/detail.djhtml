@@ -1,0 +1,19 @@
+{% extends "admin/base.djhtml" %}
+{% import "_forms.djhtml" as forms %}
+
+
+{% block content %}
+    <div class="page-header">
+        <h1>{{ msg.title }}</h1>
+    </div>
+    <p>{{ msg.body }}</p>
+    <p>{{ msg.created_at.strftime('%H:%M %Y-%m-%d')}}</p>
+    <hr>
+    <form action="{{ url_for('admin.detail', msg_id=msg.msg_id) }}" method="post">
+        {{ forms.render(form) }}
+        <div class="actions">
+            <input type="submit" class="btn btn-primary" value="submit">
+            <a href="{{ url_for('admin.list') }}" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>hqc message board</title>
+        <link href="//cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <style>.content {padding-top: 100px;}</style>
+    </head>
+    {% block topbar %}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <h2>
+                        <a href="/" class="brand">Hqc message board</a>
+                        <small>power by mongodb , mongoengine, flask</small>
+                    </h2>
+                </div>
+                <div class="navbar-collapse">
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+
+    <div class="container">
+        <div class="content">
+            {% block page_header %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block js_footer %}{% endblock %}
+</html>
