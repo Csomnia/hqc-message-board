@@ -4,17 +4,17 @@
 
 # Preparation: #
 
-  pip install virtualenv
-  virtualenv venv
+    pip install virtualenv
+    virtualenv venv
 
-  source venv/bin/activate
-  pip flask, flask-script, flask-mongoengine, mongoengine, WTForms
+    source venv/bin/activate
+    pip flask, flask-script, flask-mongoengine, mongoengine, WTForms
 
 # debug shell: #
 
-  python manage.py shell
+    python manage.py shell
 
 # run local test server: #
 
-  python manage.py runserver
+    python manage.py runserver
   
