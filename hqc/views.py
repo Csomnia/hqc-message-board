@@ -12,11 +12,12 @@ class ListView(MethodView):
 
     """
     #exclude should add msg_id
-    form = model_form(Message, exclude=[ 'created_at', 'is_show',
+    form = model_form(Message, exclude=['msg_id', 'created_at', 'is_show',
                                         'tags', 'replies'])
 
     def get_context(self):
         msgs = Message.objects.all()
+        print(Message.objects.count())
         form = self.form(request.form)
 
         context = {
@@ -27,8 +28,13 @@ class ListView(MethodView):
 
     def get(self):
         context = self.get_context()
-        #messages = Message.objects.all()
         return render_template('list.djhtml', **context)
+
+    def get_id(self):
+        new_id = Message.objects.count()
+        while Message.objects(msg_id=new_id).count() > 0:
+            new_id += 1
+        return new_id
 
     def post(self):
         context = self.get_context()
@@ -38,7 +44,7 @@ class ListView(MethodView):
             new_msg = Message()
             form.populate_obj(new_msg)
 
-            #newmsg.msg_id = some_random_mothod_to_get_id()
+            new_msg.msg_id = self.get_id()
             new_msg.save()
             return redirect(url_for('messages.list'))
         return render_template('list.djhtml', **context)
