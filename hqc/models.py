@@ -4,7 +4,7 @@ from hqc import db
 from wtforms.validators import Email
 
 
-class Reply(db.EmbeddedDocument):
+class HqcReply(db.EmbeddedDocument):
     """define doucument of replies
 
     """
@@ -13,7 +13,7 @@ class Reply(db.EmbeddedDocument):
     body = db.StringField(require=True)
 
 
-class Message(db.DynamicDocument):
+class HqcMessage(db.DynamicDocument):
     """define document of messages
 
     """
@@ -24,7 +24,7 @@ class Message(db.DynamicDocument):
     is_show = db.BooleanField(default=True)
     body = db.StringField(required=True)
     tags = db.ListField(db.StringField(max_length=50))
-    replies = db.ListField(db.EmbeddedDocumentField('Reply'))
+    replies = db.ListField(db.EmbeddedDocumentField('HqcReply'))
 
     def __unicode__(self):
         return self.title

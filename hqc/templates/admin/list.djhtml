@@ -14,8 +14,22 @@
                 location.reload();
             });
      }
+     $(document).ready(function(){
+         $("#mail").click(function(){
+             $.post("{{ url_for('admin.list', recipient="123a") }}",
+                    {
+                        recipient:"346097601@qq.com",
+                    },
+                 function(data,status){
+                     alert("Data: " + data + "\nStatus: " + status);
+                 }
+             );
+             //alert("btn onclick.");
+         });
+     }
+     );
     </script>
-    <button>POST text</button>
+    <button id="mail">POST text</button>
 
 
     <table class="table table-bordered table-striped">

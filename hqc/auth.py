@@ -2,8 +2,6 @@ from functools import wraps
 from flask import request, Response
 
 
-
-
 def check_auth(username, password):
     return username == 'admin' and password == 'admin'
 
